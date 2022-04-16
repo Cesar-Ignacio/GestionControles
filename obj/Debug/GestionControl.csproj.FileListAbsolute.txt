@@ -1,0 +1,14 @@
+C:\Users\Usuario\Documents\GestionControl\GestionControl\bin\Debug\GestionControl.exe.config
+C:\Users\Usuario\Documents\GestionControl\GestionControl\bin\Debug\GestionControl.exe
+C:\Users\Usuario\Documents\GestionControl\GestionControl\bin\Debug\GestionControl.pdb
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.csproj.SuggestedBindingRedirects.cache
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.Form1.resources
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.Properties.Resources.resources
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.csproj.GenerateResource.cache
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.exe
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.pdb
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.Vistas.vs_Inicio.resources
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.Vistas.vs_Consultas.resources
+C:\Users\Usuario\Documents\GestionControl\GestionControl\obj\Debug\GestionControl.Vistas.vs_CrearControl.resources
