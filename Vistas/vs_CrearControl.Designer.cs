@@ -133,6 +133,7 @@
             this.btCancelar.Size = new System.Drawing.Size(58, 40);
             this.btCancelar.TabIndex = 14;
             this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.btCancelar_Click);
             // 
             // btModificar
             // 

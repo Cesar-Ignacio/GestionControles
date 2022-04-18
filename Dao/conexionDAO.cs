@@ -44,9 +44,41 @@ namespace GestionControl.Dao
                 return false;   
             }
         }
+        public bool obtencionDeUnDato(SqlCommand oComando, ref String valorRetorno)
+        {
+            try
+            {
+
+                SqlCommand cmd = oComando;
+                cmd.Connection = establecerConexion();
+                valorRetorno=Convert.ToString(cmd.ExecuteScalar());
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool obtencionDeUnDato(String consulta, ref String valorRetorno)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = consulta;
+                cmd.Connection = establecerConexion();
+                valorRetorno = Convert.ToString(cmd.ExecuteScalar());
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public bool obtencionDeDatos(String consulta,ref DataSet ds)
         {
-            
 
             try
             {
@@ -82,6 +114,7 @@ namespace GestionControl.Dao
                 return false;
             }
         }
+        //ejecucion mediante un procedimiento almacenado
         public bool ejecucionDeComandos(SqlCommand oComando,string nombreSP)
         {
             try
@@ -91,6 +124,24 @@ namespace GestionControl.Dao
                 cmd.Connection = establecerConexion();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = nombreSP;
+                cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        //ejecucion mediante una consulta
+        public bool ejecucionDeComandos(String consulta)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = consulta;
+                cmd.Connection = establecerConexion();
                 cmd.ExecuteNonQuery();
                 conexion.Close();
                 return true;

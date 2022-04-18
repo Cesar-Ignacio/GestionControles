@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Dao\conexionDAO.cs" />
     <Compile Include="Dao\controlDAO.cs" />
+    <Compile Include="Dao\MarcaDAO.cs" />
+    <Compile Include="Dao\marca_X_ControlDAO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +57,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Negocio\ControlNEG.cs" />
+    <Compile Include="Negocio\MarcaControlNEG.cs" />
+    <Compile Include="Negocio\MarcaNEG.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

@@ -20,13 +20,20 @@ namespace GestionControl.Vistas
         byte[] imagenByte;
         ControlNEG oControlNEG;
         MemoryStream memoria;
-
+        MarcaControlNEG oMarcaControlNEG;
+        MarcaNEG oMarcaNEG;
+        MarcaDAO oMarcaDAO;
+        marca_X_ControlDAO oMarcaControlDAO;
         public vs_CrearControl()
         {
             InitializeComponent();
             oControlDAO = new controlDAO();
             oControlNEG = new ControlNEG();
             memoria = new MemoryStream();
+            oMarcaControlNEG = new MarcaControlNEG();
+            oMarcaNEG = new MarcaNEG();
+            oMarcaDAO=new MarcaDAO();
+            oMarcaControlDAO = new marca_X_ControlDAO();
         }
 
         
@@ -67,9 +74,29 @@ namespace GestionControl.Vistas
         {
             recuperarInformacion();
        
+
             MessageBox.Show("Se pudo escribir:"+oControlDAO.insertarControl(oControlNEG));
 
+            cargarControlMarca();
+
+
             cargarControles();
+
+
+
+        }
+
+        private void cargarControlMarca()
+        {
+            oMarcaControlNEG.codControl = tbCodControl.Text;
+
+            foreach (String item in lbxListaMarca.SelectedItems)
+            {
+                oMarcaNEG.nombreMarca = item.ToString();
+                oMarcaControlNEG.codMarca=oMarcaDAO.obtenerCodMarca1(oMarcaNEG);
+                MessageBox.Show("Se agrego control "+ item.ToString()+" : "+ oMarcaControlDAO.guaradarControlMarca1(oMarcaControlNEG));
+            }
+
         }
 
         private void recuperarInformacion()
@@ -110,8 +137,16 @@ namespace GestionControl.Vistas
             memoria = new MemoryStream((byte[])dgvListaControles.Rows[indice].Cells[2].Value);
             Bitmap btp = new Bitmap(memoria);
             pbxImagenControl.Image= btp;
+            
             imagenByte = memoria.ToArray();
 
         }
+
+        private void btCancelar_Click(object sender, EventArgs e)
+        {
+         
+            
+        }
+
     }
 }
