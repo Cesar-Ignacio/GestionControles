@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using GestionControl.Negocio;
 using GestionControl.Dao;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace GestionControl.Vistas
 {
@@ -17,15 +18,42 @@ namespace GestionControl.Vistas
     {
         controlDAO oControlDAO;
         byte[] imagenByte;
+        ControlNEG oControlNEG;
+        MemoryStream memoria;
+
         public vs_CrearControl()
         {
             InitializeComponent();
-            oControlDAO = new controlDAO(); 
+            oControlDAO = new controlDAO();
+            oControlNEG = new ControlNEG();
+            memoria = new MemoryStream();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        
+        private void vs_CrearControl_Load(object sender, EventArgs e)
         {
 
+            cargarListaDeMarcas();
+            cargarControles();
+           
+        }
+
+        public void cargarListaDeMarcas()
+        {
+            SqlDataReader oDtR = oControlDAO.obtencionDeMarcas();
+
+            while (oDtR.Read())
+            {
+                lbxListaMarca.Items.Add(oDtR["nombreMarca"]);
+            }
+
+            oControlDAO.cerrarConexion();
+
+        }
+
+        public void cargarControles()
+        {
+            dgvListaControles.DataSource = oControlDAO.obtenerControles();
         }
 
         private void btInicio_Click(object sender, EventArgs e)
@@ -38,24 +66,23 @@ namespace GestionControl.Vistas
         private void btGuardarControl_Click(object sender, EventArgs e)
         {
             recuperarInformacion();
-            conexionDAO con=new conexionDAO();
-            
-            MessageBox.Show("Conexion:" + oControlDAO.obtencion());
+       
+            MessageBox.Show("Se pudo escribir:"+oControlDAO.insertarControl(oControlNEG));
+
+            cargarControles();
         }
 
         private void recuperarInformacion()
         {
-            ControlNEG oControl=new ControlNEG();
-
+           
             int cantidad = 0; int.TryParse(tbCantidad.Text,out cantidad);
 
-            oControl.codControl = tbCodControl.Text;
-            oControl.cantidad = cantidad;
-            oControl.imagenControl = imagenByte;
-            MessageBox.Show(oControl.codControl);
-            MessageBox.Show("Cantidad:"+oControl.cantidad);
-            MessageBox.Show("Imagen:" + oControl.imagenControl);
-
+            oControlNEG.codControl = tbCodControl.Text;
+            oControlNEG.cantidad = cantidad;
+            oControlNEG.imagenControl = imagenByte;
+            MessageBox.Show(oControlNEG.codControl);
+            MessageBox.Show("Cantidad:"+oControlNEG.cantidad);
+            MessageBox.Show("Imagen:" + oControlNEG.imagenControl);
 
         }
 
@@ -67,10 +94,24 @@ namespace GestionControl.Vistas
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pbxImagenControl.Image = Image.FromStream(ofd.OpenFile());
-                MemoryStream memoria = new MemoryStream();
+                memoria = new MemoryStream();
                 pbxImagenControl.Image.Save(memoria,System.Drawing.Imaging.ImageFormat.Jpeg);
                 imagenByte = memoria.ToArray();
             }
+        }
+
+        private void Seleccionar(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int indice = e.RowIndex;
+
+            tbCodControl.Text = dgvListaControles.Rows[indice].Cells[0].Value.ToString();
+            tbCantidad.Text = dgvListaControles.Rows[indice].Cells[1].Value.ToString();
+
+            memoria = new MemoryStream((byte[])dgvListaControles.Rows[indice].Cells[2].Value);
+            Bitmap btp = new Bitmap(memoria);
+            pbxImagenControl.Image= btp;
+            imagenByte = memoria.ToArray();
+
         }
     }
 }

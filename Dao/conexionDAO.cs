@@ -20,13 +20,18 @@ namespace GestionControl.Dao
             this.conexion.Open();
             return this.conexion;
         }
+
+        public void cerraConexion()
+        {
+            conexion.Close();
+        }
         
 
         public bool obtencionDeDatos()
         {
             try
             {
-             
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandText = "select * from Marca";
                 cmd.Connection = establecerConexion();
@@ -39,7 +44,62 @@ namespace GestionControl.Dao
                 return false;   
             }
         }
+        public bool obtencionDeDatos(String consulta,ref DataSet ds)
+        {
+            
 
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = consulta;
+                cmd.Connection = establecerConexion();
+                SqlDataAdapter adapter = new SqlDataAdapter(consulta,conexion);
+                adapter.Fill(ds,"Tabla");
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool obtencionDeDatos(String consulta,ref SqlDataReader oDr)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = consulta;
+                cmd.Connection = establecerConexion();
+                oDr=cmd.ExecuteReader();
+                
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool ejecucionDeComandos(SqlCommand oComando,string nombreSP)
+        {
+            try
+            {
+
+                SqlCommand cmd = oComando;
+                cmd.Connection = establecerConexion();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = nombreSP;
+                cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
     }
 }
