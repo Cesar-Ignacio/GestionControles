@@ -144,6 +144,7 @@
             this.btModificar.Size = new System.Drawing.Size(58, 40);
             this.btModificar.TabIndex = 13;
             this.btModificar.UseVisualStyleBackColor = true;
+            this.btModificar.Click += new System.EventHandler(this.btModificar_Click);
             // 
             // btEliminar
             // 
@@ -154,6 +155,7 @@
             this.btEliminar.Size = new System.Drawing.Size(59, 40);
             this.btEliminar.TabIndex = 12;
             this.btEliminar.UseVisualStyleBackColor = true;
+            this.btEliminar.Click += new System.EventHandler(this.btEliminar_Click);
             // 
             // btInicio
             // 

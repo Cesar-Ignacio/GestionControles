@@ -14,6 +14,7 @@ namespace GestionControl.Dao
 
         SqlCommand cmd;
         conexionDAO oConexionDAO;
+        String consulta;
         public marca_X_ControlDAO()
         {
             cmd = new SqlCommand();
@@ -42,11 +43,30 @@ namespace GestionControl.Dao
 
         public bool guaradarControlMarca1(MarcaControlNEG oMarcaContrlNEG)
         {
-
-            String consulta = "INSERT INTO Control_X_Marca (codControl,codMarca) SELECT '" + oMarcaContrlNEG.codControl + "','" + oMarcaContrlNEG.codMarca + "'";
+            consulta = "INSERT INTO Control_X_Marca (codControl,codMarca) SELECT '" + oMarcaContrlNEG.codControl + "','" + oMarcaContrlNEG.codMarca + "'";
             return oConexionDAO.ejecucionDeComandos(consulta);
         }
 
+        public bool actualizarDatos(MarcaControlNEG oMarcaControlNEG)
+        {
+           
+   
+            cargaParametros2(oMarcaControlNEG);
+
+            return oConexionDAO.ejecucionDeComandos(cmd,"sp_EliminarMarcaControl");
+            //int fiAF=0;
+            //consulta= "delete from Control_X_Marca where codControl='"+cod+"'";
+            //oConexionDAO.ejecucionDeComandos(consulta,ref fiAF);
+            //return fiAF;
+        }
+        public void cargaParametros2(MarcaControlNEG oMarcaControlNEG)
+        {
+            SqlParameter sp = new SqlParameter();
+
+            sp = cmd.Parameters.Add("@codControl", SqlDbType.Char);
+            sp.Value = oMarcaControlNEG.codControl;
+
+        }
 
 
     }

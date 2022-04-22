@@ -64,6 +64,14 @@ namespace GestionControl.Dao
             return ds.Tables["Tabla"];
         }
 
+        public bool actualizarControl(ControlNEG oControlNEG)
+        {
+            // consulta = "UPDATE Control set cantidad="+oControlNEG.cantidad+", imagen="+oControlNEG.imagenControl+" where codControl='"+oControlNEG.codControl+"'";
+            // consulta = "UPDATE Control set cantidad="+oControlNEG.cantidad+", imagen="+oControlNEG.imagenControl.ToArray()+" where codControl='"+oControlNEG.codControl+"'";
+            cargaDeParametros(oControlNEG);
+            return oConexionDAO.ejecucionDeComandos(oComando, "spActualizarControl");   
+        }
+
         public void cerrarConexion()
         {
             oConexionDAO.cerraConexion();

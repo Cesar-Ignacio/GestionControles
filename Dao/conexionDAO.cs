@@ -152,5 +152,23 @@ namespace GestionControl.Dao
             }
         }
 
+        public bool ejecucionDeComandos(String consulta,ref int filasA)
+        {
+            try
+            {
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandText = consulta;
+                cmd.Connection = establecerConexion();
+                filasA=cmd.ExecuteNonQuery();
+                conexion.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

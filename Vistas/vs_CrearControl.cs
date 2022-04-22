@@ -24,6 +24,7 @@ namespace GestionControl.Vistas
         MarcaNEG oMarcaNEG;
         MarcaDAO oMarcaDAO;
         marca_X_ControlDAO oMarcaControlDAO;
+       
         public vs_CrearControl()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace GestionControl.Vistas
 
             cargarListaDeMarcas();
             cargarControles();
+            estadoBotones(false);
            
         }
 
@@ -90,13 +92,22 @@ namespace GestionControl.Vistas
         {
             oMarcaControlNEG.codControl = tbCodControl.Text;
 
-            foreach (String item in lbxListaMarca.SelectedItems)
+            if(lbxListaMarca.SelectedIndices.Count>0)
             {
-                oMarcaNEG.nombreMarca = item.ToString();
-                oMarcaControlNEG.codMarca=oMarcaDAO.obtenerCodMarca1(oMarcaNEG);
-                MessageBox.Show("Se agrego control "+ item.ToString()+" : "+ oMarcaControlDAO.guaradarControlMarca1(oMarcaControlNEG));
+                foreach (String item in lbxListaMarca.SelectedItems)
+                {
+                    oMarcaNEG.nombreMarca = item.ToString();
+                    oMarcaControlNEG.codMarca = oMarcaDAO.obtenerCodMarca1(oMarcaNEG);
+                    MessageBox.Show("Se agrego control " + item.ToString() + " : " + oMarcaControlDAO.guaradarControlMarca1(oMarcaControlNEG));
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No se agrego marcas");
             }
 
+            
         }
 
         private void recuperarInformacion()
@@ -129,8 +140,14 @@ namespace GestionControl.Vistas
 
         private void Seleccionar(object sender, DataGridViewCellMouseEventArgs e)
         {
+             
             int indice = e.RowIndex;
 
+
+            estadoBotones(true);
+            btGuardarControl.Enabled = false;
+
+            
             tbCodControl.Text = dgvListaControles.Rows[indice].Cells[0].Value.ToString();
             tbCantidad.Text = dgvListaControles.Rows[indice].Cells[1].Value.ToString();
 
@@ -140,13 +157,79 @@ namespace GestionControl.Vistas
             
             imagenByte = memoria.ToArray();
 
+
+
         }
 
         private void btCancelar_Click(object sender, EventArgs e)
         {
-         
+            btGuardarControl.Enabled = true;
+            estadoBotones(false);
+            limpiarContenido();
             
         }
 
+        private void btModificar_Click(object sender, EventArgs e)
+        {
+            btGuardarControl.Enabled = true;
+           
+            estadoBotones(false);
+           
+            oMarcaControlNEG.codControl = tbCodControl.Text;
+
+            MessageBox.Show("ddd:"+ oMarcaControlNEG.codControl +"_"+ oMarcaControlDAO.actualizarDatos(oMarcaControlNEG));
+
+            cargarControlMarca();
+
+            actualizarControl();
+
+  //          cargarControles();
+
+//            limpiarContenido();
+
+            cerrar();
+
+        }
+        private void cerrar()
+        {
+            vs_CrearControl ve = new vs_CrearControl();
+            ve.Show();
+            this.Close();
+           
+        }
+
+        private void actualizarControl()
+        {
+            recuperarInformacion();
+
+            MessageBox.Show("Se pudo actualizar:"+oControlDAO.actualizarControl(oControlNEG));
+
+        }
+
+        private void btEliminar_Click(object sender, EventArgs e)
+        {
+           
+            limpiarContenido();
+            estadoBotones(false);
+            btGuardarControl.Enabled = true;
+
+           
+        }
+        public void limpiarContenido()
+        {
+            tbCodControl.Clear();
+            tbCantidad.Clear();
+            lbxListaMarca.ClearSelected();
+            pbxImagenControl.Image = null;          
+        }
+
+        public void estadoBotones(bool estado)
+        {
+            btCancelar.Enabled = estado;
+            btModificar.Enabled = estado;
+            btEliminar.Enabled = estado;
+        }
+
+       
     }
 }
