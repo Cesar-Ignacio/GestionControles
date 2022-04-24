@@ -30,12 +30,9 @@
         {
             this.cbxMarcaControl = new System.Windows.Forms.ComboBox();
             this.lbTituloNombreMarca = new System.Windows.Forms.Label();
-            this.dgvListaControles = new System.Windows.Forms.DataGridView();
-            this.blInformacionControl = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btInicio = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaControles)).BeginInit();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +43,7 @@
             this.cbxMarcaControl.Location = new System.Drawing.Point(12, 42);
             this.cbxMarcaControl.Name = "cbxMarcaControl";
             this.cbxMarcaControl.Size = new System.Drawing.Size(435, 37);
+            this.cbxMarcaControl.Sorted = true;
             this.cbxMarcaControl.TabIndex = 0;
             // 
             // lbTituloNombreMarca
@@ -57,32 +55,6 @@
             this.lbTituloNombreMarca.Size = new System.Drawing.Size(90, 13);
             this.lbTituloNombreMarca.TabIndex = 1;
             this.lbTituloNombreMarca.Text = "Marca de control:";
-            // 
-            // dgvListaControles
-            // 
-            this.dgvListaControles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaControles.Location = new System.Drawing.Point(15, 85);
-            this.dgvListaControles.Name = "dgvListaControles";
-            this.dgvListaControles.Size = new System.Drawing.Size(757, 246);
-            this.dgvListaControles.TabIndex = 2;
-            // 
-            // blInformacionControl
-            // 
-            this.blInformacionControl.AutoSize = true;
-            this.blInformacionControl.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.blInformacionControl.Location = new System.Drawing.Point(12, 334);
-            this.blInformacionControl.Name = "blInformacionControl";
-            this.blInformacionControl.Size = new System.Drawing.Size(112, 13);
-            this.blInformacionControl.TabIndex = 3;
-            this.blInformacionControl.Text = "Infromacion de control";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 351);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(757, 84);
-            this.dataGridView1.TabIndex = 4;
             // 
             // btInicio
             // 
@@ -105,17 +77,25 @@
             this.btBuscar.TabIndex = 6;
             this.btBuscar.Text = "Buscar";
             this.btBuscar.UseVisualStyleBackColor = false;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 85);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(757, 364);
+            this.dataGridView1.TabIndex = 7;
             // 
             // vs_Consultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btBuscar);
             this.Controls.Add(this.btInicio);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.blInformacionControl);
-            this.Controls.Add(this.dgvListaControles);
             this.Controls.Add(this.lbTituloNombreMarca);
             this.Controls.Add(this.cbxMarcaControl);
             this.MaximumSize = new System.Drawing.Size(800, 500);
@@ -123,7 +103,7 @@
             this.Name = "vs_Consultas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "vs_Consultas";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaControles)).EndInit();
+            this.Load += new System.EventHandler(this.vs_Consultas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -134,10 +114,8 @@
 
         private System.Windows.Forms.ComboBox cbxMarcaControl;
         private System.Windows.Forms.Label lbTituloNombreMarca;
-        private System.Windows.Forms.DataGridView dgvListaControles;
-        private System.Windows.Forms.Label blInformacionControl;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btInicio;
         private System.Windows.Forms.Button btBuscar;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

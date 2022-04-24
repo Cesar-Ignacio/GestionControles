@@ -15,11 +15,13 @@ namespace GestionControl.Dao
         SqlCommand cmd;
         String consulta;
         SqlDataReader oDtR;
+        DataSet dts;
         public MarcaDAO()
         {
             oConexionDAO = new conexionDAO();
             cmd = new SqlCommand();
-          
+            dts=new DataSet();
+
         }
 
         public string  obtenerCodMarca(MarcaNEG marcaNeg)
@@ -45,6 +47,16 @@ namespace GestionControl.Dao
             oConexionDAO.obtencionDeDatos(consulta, ref oDtR);
 
             return oDtR;
+        }
+
+        public DataTable controlesDeMarca(MarcaNEG oMarcaNEGO)
+        {
+           consulta = "select Control.codControl, cantidad, nombreMarca, imagen from Control_X_Marca inner join Marca on Marca.codMarca = Control_X_Marca.codMarca inner join Control on Control.codControl = Control_X_Marca.codControl where Marca.nombreMarca = '"+oMarcaNEGO.nombreMarca+"'";
+           dts = new DataSet();
+       
+           oConexionDAO.obtencionDeDatos(consulta,ref dts);
+
+            return dts.Tables["Tabla"];
         }
 
         public void cerrarConexion()

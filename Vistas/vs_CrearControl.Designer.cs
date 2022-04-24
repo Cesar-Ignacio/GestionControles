@@ -117,11 +117,14 @@
             // 
             // dgvListaControles
             // 
-            this.dgvListaControles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaControles.AllowUserToOrderColumns = true;
+            this.dgvListaControles.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvListaControles.ColumnHeadersHeight = 20;
+            this.dgvListaControles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvListaControles.Location = new System.Drawing.Point(45, 299);
             this.dgvListaControles.Name = "dgvListaControles";
             this.dgvListaControles.ReadOnly = true;
-            this.dgvListaControles.Size = new System.Drawing.Size(584, 150);
+            this.dgvListaControles.Size = new System.Drawing.Size(584, 154);
             this.dgvListaControles.TabIndex = 11;
             this.dgvListaControles.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Seleccionar);
             // 
