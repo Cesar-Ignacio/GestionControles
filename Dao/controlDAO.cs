@@ -47,14 +47,6 @@ namespace GestionControl.Dao
 
         }
 
-        public SqlDataReader obtencionDeMarcas()
-        {
-            consulta = "select nombreMarca from Marca";
-
-            oConexionDAO.obtencionDeDatos(consulta,ref oDtR);
-
-            return oDtR;
-        }
 
         public DataTable obtenerControles()
         {
@@ -72,11 +64,12 @@ namespace GestionControl.Dao
             return oConexionDAO.ejecucionDeComandos(oComando, "spActualizarControl");   
         }
 
-        public void cerrarConexion()
+        public bool eliminarControl(ControlNEG oControlNEG)
         {
-            oConexionDAO.cerraConexion();
+            consulta = "delete from Control where codControl='"+oControlNEG.codControl+"'";
+            
+            return oConexionDAO.ejecucionDeComandos(consulta);
         }
-
        
 
 

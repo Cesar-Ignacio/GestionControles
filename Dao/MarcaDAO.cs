@@ -13,10 +13,13 @@ namespace GestionControl.Dao
 
         conexionDAO oConexionDAO;
         SqlCommand cmd;
+        String consulta;
+        SqlDataReader oDtR;
         public MarcaDAO()
         {
             oConexionDAO = new conexionDAO();
             cmd = new SqlCommand();
+          
         }
 
         public string  obtenerCodMarca(MarcaNEG marcaNeg)
@@ -35,6 +38,18 @@ namespace GestionControl.Dao
             oConexionDAO.obtencionDeUnDato(consulta, ref codMarca);
             return codMarca;
         }
+        public SqlDataReader obtencionDeMarcas()
+        {
+            consulta = "select nombreMarca from Marca";
 
+            oConexionDAO.obtencionDeDatos(consulta, ref oDtR);
+
+            return oDtR;
+        }
+
+        public void cerrarConexion()
+        {
+            oConexionDAO.cerraConexion();
+        }
     }
 }

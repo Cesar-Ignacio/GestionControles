@@ -151,7 +151,7 @@ namespace GestionControl.Dao
                 return false;
             }
         }
-
+        //esta nos devuelve la cantidad de filas afectadas
         public bool ejecucionDeComandos(String consulta,ref int filasA)
         {
             try

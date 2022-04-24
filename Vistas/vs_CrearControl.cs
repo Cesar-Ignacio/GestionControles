@@ -49,14 +49,14 @@ namespace GestionControl.Vistas
 
         public void cargarListaDeMarcas()
         {
-            SqlDataReader oDtR = oControlDAO.obtencionDeMarcas();
+            SqlDataReader oDtR = oMarcaDAO.obtencionDeMarcas();
 
             while (oDtR.Read())
             {
                 lbxListaMarca.Items.Add(oDtR["nombreMarca"]);
             }
 
-            oControlDAO.cerrarConexion();
+            oMarcaDAO.cerrarConexion();
 
         }
 
@@ -146,7 +146,7 @@ namespace GestionControl.Vistas
 
             estadoBotones(true);
             btGuardarControl.Enabled = false;
-
+            tbCodControl.Enabled = false;
             
             tbCodControl.Text = dgvListaControles.Rows[indice].Cells[0].Value.ToString();
             tbCantidad.Text = dgvListaControles.Rows[indice].Cells[1].Value.ToString();
@@ -164,6 +164,7 @@ namespace GestionControl.Vistas
         private void btCancelar_Click(object sender, EventArgs e)
         {
             btGuardarControl.Enabled = true;
+            tbCodControl.Enabled = true;
             estadoBotones(false);
             limpiarContenido();
             
@@ -172,7 +173,7 @@ namespace GestionControl.Vistas
         private void btModificar_Click(object sender, EventArgs e)
         {
             btGuardarControl.Enabled = true;
-           
+            
             estadoBotones(false);
            
             oMarcaControlNEG.codControl = tbCodControl.Text;
@@ -183,19 +184,16 @@ namespace GestionControl.Vistas
 
             actualizarControl();
 
-  //          cargarControles();
-
-//            limpiarContenido();
-
-            cerrar();
+            recargarVentana();
 
         }
-        private void cerrar()
+        private void recargarVentana()
         {
-            vs_CrearControl ve = new vs_CrearControl();
-            ve.Show();
+            Form ve = new vs_CrearControl();
+            
             this.Close();
-           
+            ve.Show();
+
         }
 
         private void actualizarControl()
@@ -208,11 +206,11 @@ namespace GestionControl.Vistas
 
         private void btEliminar_Click(object sender, EventArgs e)
         {
-           
-            limpiarContenido();
-            estadoBotones(false);
-            btGuardarControl.Enabled = true;
 
+            oControlNEG.codControl=tbCodControl.Text;
+            MessageBox.Show("Se eliminno el registro:"+ oControlDAO.eliminarControl(oControlNEG));
+  
+            recargarVentana();
            
         }
         public void limpiarContenido()
@@ -230,6 +228,13 @@ namespace GestionControl.Vistas
             btEliminar.Enabled = estado;
         }
 
-       
+        private void tbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if((e.KeyChar<48 || e.KeyChar>57) && e.KeyChar!=8)
+            {
+                MessageBox.Show("Solo números","Atención");
+                e.Handled = true;
+            }
+        }
     }
 }
