@@ -15,8 +15,6 @@ namespace GestionControl.Dao
 
         SqlCommand oComando;
 
-        SqlDataReader oDtR;
-
         String consulta;
 
         public controlDAO()
@@ -69,6 +67,12 @@ namespace GestionControl.Dao
             consulta = "delete from Control where codControl='"+oControlNEG.codControl+"'";
             
             return oConexionDAO.ejecucionDeComandos(consulta);
+        }
+        public bool actualizarControlStock(ControlNEG oControlNEG)
+        {
+            consulta = "UPDATE Control set cantidad= cantidad - " +oControlNEG.cantidad+" where codControl='"+oControlNEG.codControl+"'";
+            return oConexionDAO.ejecucionDeComandos(consulta);
+
         }
        
 

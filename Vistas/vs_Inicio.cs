@@ -28,5 +28,17 @@ namespace GestionControl.Vistas
             Form formulario=new vs_CrearControl();
             formulario.ShowDialog();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbhora.Text = DateTime.Now.ToString("hh:mm:ss");
+            lbfecha.Text = DateTime.Now.ToLongDateString();
+
+        }
+
+        private void vs_Inicio_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

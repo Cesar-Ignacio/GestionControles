@@ -147,15 +147,25 @@ namespace GestionControl.Vistas
             estadoBotones(true);
             btGuardarControl.Enabled = false;
             tbCodControl.Enabled = false;
-            
-            tbCodControl.Text = dgvListaControles.Rows[indice].Cells[0].Value.ToString();
-            tbCantidad.Text = dgvListaControles.Rows[indice].Cells[1].Value.ToString();
 
-            memoria = new MemoryStream((byte[])dgvListaControles.Rows[indice].Cells[2].Value);
-            Bitmap btp = new Bitmap(memoria);
-            pbxImagenControl.Image= btp;
-            
-            imagenByte = memoria.ToArray();
+            try
+            {
+                tbCodControl.Text = dgvListaControles.Rows[indice].Cells[0].Value.ToString();
+                tbCantidad.Text = dgvListaControles.Rows[indice].Cells[1].Value.ToString();
+
+                memoria = new MemoryStream((byte[])dgvListaControles.Rows[indice].Cells[2].Value);
+                Bitmap btp = new Bitmap(memoria);
+                pbxImagenControl.Image = btp;
+
+                imagenByte = memoria.ToArray();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("ERROR", "Atención");
+            }
+
+          
 
 
 
@@ -235,6 +245,27 @@ namespace GestionControl.Vistas
                 MessageBox.Show("Solo números","Atención");
                 e.Handled = true;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbfecha_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbhora.Text = DateTime.Now.ToString("hh:mm:ss");
+            lbfecha.Text = DateTime.Now.ToLongDateString();
         }
     }
 }
