@@ -1,6 +1,12 @@
-# GestionControles
-Gestión de Controles 
------------
+
+## Gestión de Controles
+Permite crear  controles, asignar las marcas disponibles y una imagen. Puede eliminarse y modificarse .
+Las consultas se hacen por las marcas y se podrá descontar la cantidad digitada.
+
+## Base de Datos
+### DER
+[![Captura-de-pantalla-2022-04-29-231027.png](https://i.postimg.cc/d074WP8Z/Captura-de-pantalla-2022-04-29-231027.png)](https://postimg.cc/kVmQ4HY7)
+#### Script de la base de datos utilizada
 ```sql
 create  database Control
 ON PRIMARY
@@ -147,6 +153,7 @@ go
 ---
 
 ```
+## Vistas
 
 [![Captura-de-pantalla-2022-04-27-092707.png](https://i.postimg.cc/x1S840vW/Captura-de-pantalla-2022-04-27-092707.png)](https://postimg.cc/N5pQyvP4)
 [![Captura-de-pantalla-2022-04-27-092544.png](https://i.postimg.cc/FKTKz3M4/Captura-de-pantalla-2022-04-27-092544.png)](https://postimg.cc/DWbhYJfj)
